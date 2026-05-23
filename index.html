@@ -573,6 +573,182 @@
     /* adjust photo-wrap when inside hero-right-inner */
     .hero-right-inner .photo-wrap { margin: 0; }
 
+    /* ─── PROJECT FILTERS ─── */
+    .proj-filters {
+      display: flex; gap: 0.6rem; flex-wrap: wrap;
+      margin-bottom: 2.5rem;
+    }
+    .pf-btn {
+      background: var(--card); border: 1px solid var(--border);
+      color: var(--muted); font-size: 0.82rem; font-weight: 500;
+      padding: 0.45rem 1.2rem; border-radius: 30px;
+      cursor: pointer; transition: all 0.2s;
+      font-family: 'Sora', sans-serif;
+    }
+    .pf-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .pf-btn.active { background: var(--accent); border-color: var(--accent); color: #0a0e17; font-weight: 600; }
+
+    /* PROJECT LINK BUTTONS */
+    .proj-links { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-top: 0.3rem; }
+    .proj-link-btn {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      background: rgba(255,255,255,0.05); border: 1px solid var(--border);
+      color: var(--muted); font-size: 0.78rem; font-weight: 500;
+      padding: 0.38rem 0.9rem; border-radius: 6px;
+      text-decoration: none; transition: all 0.2s;
+    }
+    .proj-link-btn:hover { border-color: var(--accent); color: var(--accent); background: rgba(56,189,248,0.06); }
+    .proj-link-btn.live { border-color: rgba(52,211,153,0.3); color: var(--green); background: rgba(52,211,153,0.06); }
+    .proj-link-btn.live:hover { background: rgba(52,211,153,0.12); }
+    .proj-link-btn.coming {
+      border-color: rgba(251,191,36,0.2); color: var(--gold);
+      background: rgba(251,191,36,0.06); cursor: default;
+    }
+    [data-theme="light"] .proj-link-btn { background: rgba(0,0,0,0.04); }
+
+    /* GITHUB CTA */
+    .github-cta {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 1.5rem; flex-wrap: wrap;
+      background: var(--card); border: 1px solid rgba(56,189,248,0.15);
+      border-radius: 14px; padding: 1.5rem 2rem;
+      margin-top: 2rem;
+      transition: background 0.35s;
+    }
+    .ghcta-left { display: flex; align-items: center; gap: 1rem; }
+    .ghcta-icon { font-size: 2rem; }
+    .ghcta-title { font-size: 1rem; color: var(--white); font-weight: 600; }
+    .ghcta-sub { font-size: 0.82rem; color: var(--muted); margin-top: 0.15rem; }
+
+    /* PROJ CARD HIDDEN */
+    .proj-card.hidden { display: none; }
+
+    /* ─── COLLABORATION FULL PAGE ─── */
+    .collab-overlay {
+      position: fixed; inset: 0; z-index: 9999;
+      background: var(--bg);
+      display: flex; flex-direction: column;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.35s;
+      overflow-y: auto;
+    }
+    .collab-overlay.open { opacity: 1; pointer-events: all; }
+
+    /* Top bar with back button */
+    .collab-topbar {
+      display: flex; align-items: center; gap: 1rem;
+      padding: 1.2rem 6%;
+      border-bottom: 1px solid var(--border);
+      background: var(--nav-bg);
+      backdrop-filter: blur(12px);
+      position: sticky; top: 0; z-index: 1;
+      flex-shrink: 0;
+    }
+    .collab-back {
+      display: flex; align-items: center; gap: 0.5rem;
+      background: var(--card); border: 1px solid var(--border);
+      color: var(--body); font-size: 0.85rem; font-weight: 500;
+      padding: 0.5rem 1.1rem; border-radius: 8px;
+      cursor: pointer; transition: all 0.2s;
+      font-family: 'Sora', sans-serif;
+    }
+    .collab-back:hover { border-color: var(--accent); color: var(--accent); }
+    .collab-topbar-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem; font-weight: 700; color: var(--white);
+      margin-left: auto;
+    }
+    .collab-topbar-logo span { color: var(--accent); font-style: italic; }
+
+    /* Main content */
+    .collab-body {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      max-width: 1100px;
+      margin: 0 auto;
+      width: 100%;
+      padding: 4rem 6%;
+      align-items: start;
+    }
+    .collab-left { padding-right: 3rem; border-right: 1px solid var(--border); }
+    .collab-right { padding-left: 3rem; }
+
+    .collab-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: rgba(52,211,153,0.1); border: 1px solid rgba(52,211,153,0.25);
+      color: var(--green); font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      padding: 0.35rem 1rem; border-radius: 30px; margin-bottom: 1.3rem;
+    }
+    .collab-badge::before {
+      content: ''; width: 7px; height: 7px; border-radius: 50%;
+      background: var(--green); animation: blink 2s infinite;
+    }
+    .collab-left h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 3.5vw, 2.8rem);
+      color: var(--white); line-height: 1.15; margin-bottom: 1rem;
+    }
+    .collab-left h2 em { color: var(--accent); font-style: italic; display: block; }
+    .collab-left > p { font-size: 0.93rem; color: var(--body); line-height: 1.85; margin-bottom: 2rem; }
+
+    .collab-options { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 0; }
+    .collab-opt {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.1rem;
+      cursor: pointer; transition: all 0.2s; text-align: left;
+    }
+    .collab-opt:hover { border-color: rgba(56,189,248,0.35); background: rgba(56,189,248,0.04); }
+    .collab-opt.selected { border-color: var(--accent); background: rgba(56,189,248,0.07); }
+    .co-icon { font-size: 1.5rem; margin-bottom: 0.5rem; display: block; }
+    .co-title { font-size: 0.88rem; color: var(--white); font-weight: 600; }
+    .co-desc { font-size: 0.75rem; color: var(--muted); margin-top: 0.15rem; line-height: 1.4; }
+
+    /* Right side */
+    .collab-section-title {
+      font-size: 0.72rem; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--muted); font-weight: 600; margin-bottom: 1.2rem;
+      padding-bottom: 0.7rem; border-bottom: 1px solid var(--border);
+    }
+    .collab-actions { display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 2rem; }
+    .collab-action {
+      display: flex; align-items: center; gap: 1rem;
+      text-decoration: none; color: var(--body);
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1rem 1.3rem;
+      font-size: 0.9rem; font-weight: 500;
+      transition: all 0.2s;
+    }
+    .collab-action:hover { border-color: rgba(56,189,248,0.3); color: var(--white); transform: translateX(4px); }
+    .ca-icon {
+      width: 42px; height: 42px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; flex-shrink: 0;
+    }
+    .ca-blue { background: rgba(56,189,248,0.1); }
+    .ca-green { background: rgba(52,211,153,0.1); }
+    .ca-purple { background: rgba(129,140,248,0.1); }
+    .ca-body .ca-title { font-weight: 600; color: var(--white); font-size: 0.9rem; }
+    .ca-body .ca-sub { font-size: 0.78rem; color: var(--muted); margin-top: 0.1rem; }
+
+    .collab-info-box {
+      background: var(--card); border: 1px solid rgba(56,189,248,0.15);
+      border-radius: 12px; padding: 1.3rem 1.5rem;
+    }
+    .collab-info-box h4 { font-size: 0.88rem; color: var(--white); font-weight: 600; margin-bottom: 0.8rem; }
+    .collab-info-box ul { list-style: none; display: flex; flex-direction: column; gap: 0.45rem; }
+    .collab-info-box ul li { font-size: 0.83rem; color: var(--body); padding-left: 1.1rem; position: relative; }
+    .collab-info-box ul li::before { content: '✓'; position: absolute; left: 0; color: var(--green); font-size: 0.75rem; }
+
+    @media (max-width: 768px) {
+      .collab-body { grid-template-columns: 1fr; padding: 2rem 5%; gap: 2.5rem; }
+      .collab-left { padding-right: 0; border-right: none; border-bottom: 1px solid var(--border); padding-bottom: 2.5rem; }
+      .collab-right { padding-left: 0; }
+      .collab-options { grid-template-columns: 1fr 1fr; }
+    }
+
     /* ─── ANIMATIONS ─── */
     @keyframes fadeUp { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
     @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
@@ -648,7 +824,7 @@
     </p>
     <div class="hero-btns">
       <a href="#projects" class="btn-fill">🚀 View My Work</a>
-      <a href="#contact" class="btn-line">Let's Collaborate</a>
+      <a href="#" class="btn-line" onclick="openCollab(); return false;">🤝 Let's Collaborate</a>
     </div>
     <div class="hero-stats">
       <div class="hstat"><div class="n">4+</div><div class="l">Projects Built</div></div>
@@ -777,44 +953,147 @@
 <section id="projects">
   <div class="eyebrow">Things I've built</div>
   <div class="sec-title">Featured <em>Projects</em></div>
-  <p class="sec-desc">A selection of academic and personal projects that demonstrate my range across full-stack development, desktop apps, and frontend design.</p>
-  <div class="proj-grid">
-    <div class="proj-card span2 reveal">
+  <p class="sec-desc">A collection of academic and personal projects spanning full-stack web development, desktop applications, and game development.</p>
+
+  <!-- FILTER TABS -->
+  <div class="proj-filters">
+    <button class="pf-btn active" onclick="filterProjects('all', this)">All Projects</button>
+    <button class="pf-btn" onclick="filterProjects('java', this)">☕ Java</button>
+    <button class="pf-btn" onclick="filterProjects('web', this)">🌐 Web</button>
+    <button class="pf-btn" onclick="filterProjects('php', this)">🐘 PHP</button>
+  </div>
+
+  <div class="proj-grid" id="projectGrid">
+
+    <!-- EDUPORTAL - FEATURED -->
+    <div class="proj-card span2 reveal" data-cat="php web">
       <div>
         <div class="proj-flag">⭐ Featured · Final Year Project</div>
         <h3>EduPortal – Smart Classroom System</h3>
-        <p>A complete role-based academic task management platform built for Admin, Lecturers, and Students. Includes assignment submission, deadline warning alerts, real-time performance charts with Chart.js, and a student-facing feedback interface — built as my final-year project at SLIATE Dehiwala.</p>
-        <div class="proj-tags">
-          <span class="ptag">Core PHP</span><span class="ptag">MySQL</span><span class="ptag">Bootstrap 5</span><span class="ptag">Chart.js</span><span class="ptag">PHPMyAdmin</span><span class="ptag">Role-Based Auth</span><span class="ptag">XAMPP</span>
+        <p>A complete role-based academic task management platform for Admin, Lecturers, and Students. Includes assignment submission, deadline warnings, real-time Chart.js dashboards, and a student feedback interface — built as my final-year project at SLIATE Dehiwala.</p>
+        <div class="proj-tags" style="margin-bottom:1.2rem;">
+          <span class="ptag">Core PHP</span><span class="ptag">MySQL</span><span class="ptag">Bootstrap 5</span><span class="ptag">Chart.js</span><span class="ptag">PHPMyAdmin</span><span class="ptag">Role-Based Auth</span>
+        </div>
+        <div class="proj-links">
+          <span class="proj-link-btn coming">⏳ Code Coming Soon</span>
         </div>
       </div>
       <div class="proj-thumb lg pt-blue">🎓</div>
     </div>
-    <div class="proj-card reveal">
-      <div class="proj-thumb sm pt-purple">🏫</div>
-      <div class="proj-flag">Java · Desktop App</div>
-      <h3>Student Management System</h3>
-      <p>A desktop CRUD system for managing student records — add, update, search, and delete — with a MySQL back-end and clean Java Swing UI built in NetBeans.</p>
-      <div class="proj-tags"><span class="ptag">Java</span><span class="ptag">MySQL</span><span class="ptag">JDBC</span><span class="ptag">NetBeans</span><span class="ptag">Swing UI</span></div>
+
+    <!-- EVENT MANAGEMENT -->
+    <div class="proj-card reveal" data-cat="php web">
+      <div class="proj-thumb sm pt-purple">🎪</div>
+      <div class="proj-flag">PHP · Web System</div>
+      <h3>Event Management System</h3>
+      <p>A full web-based event management platform with event creation, registration handling, and attendee management — built with PHP and MySQL.</p>
+      <div class="proj-tags" style="margin-bottom:1rem;">
+        <span class="ptag">PHP</span><span class="ptag">MySQL</span><span class="ptag">Bootstrap</span><span class="ptag">Web</span>
+      </div>
+      <div class="proj-links">
+        <a href="https://github.com/rnnazla0819-hub/event-management-system" target="_blank" class="proj-link-btn">
+          <span>⌥</span> View Code
+        </a>
+      </div>
     </div>
-    <div class="proj-card reveal">
+
+    <!-- RESORT WEBSITE -->
+    <div class="proj-card reveal" data-cat="web">
       <div class="proj-thumb sm pt-green">🏨</div>
       <div class="proj-flag">Frontend · Vanilla JS</div>
       <h3>Resort Website + Chatbot</h3>
-      <p>A fully responsive resort website with an embedded interactive chatbot for guest enquiries — built from scratch with pure HTML, CSS, and JavaScript without any frameworks.</p>
-      <div class="proj-tags"><span class="ptag">HTML5</span><span class="ptag">CSS3</span><span class="ptag">JavaScript</span><span class="ptag">Responsive</span><span class="ptag">Chatbot</span></div>
-    </div>
-    <div class="proj-card span2 reveal">
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:center;">
-        <div>
-          <div class="proj-flag">Java · OOP · Game Dev</div>
-          <h3>Snake Game</h3>
-          <p>A classic Snake game built in Java using core OOP principles — real-time movement, collision detection, progressive speed increase, and a live scoring system. Demonstrates Java GUI and game loop implementation.</p>
-          <div class="proj-tags"><span class="ptag">Java</span><span class="ptag">Swing</span><span class="ptag">OOP</span><span class="ptag">Game Loop</span><span class="ptag">Event Handling</span></div>
-        </div>
-        <div class="proj-thumb pt-gold" style="height:140px;">🐍</div>
+      <p>A fully responsive resort website with an interactive chatbot for guest enquiries — built from scratch with pure HTML, CSS, and JavaScript.</p>
+      <div class="proj-tags" style="margin-bottom:1rem;">
+        <span class="ptag">HTML5</span><span class="ptag">CSS3</span><span class="ptag">JavaScript</span><span class="ptag">Chatbot</span>
+      </div>
+      <div class="proj-links">
+        <a href="https://github.com/rnnazla0819-hub/resort-website" target="_blank" class="proj-link-btn">
+          <span>⌥</span> View Code
+        </a>
+        <a href="https://rnnazla0819-hub.github.io/resort-website" target="_blank" class="proj-link-btn live">
+          <span>🔗</span> Live Demo
+        </a>
       </div>
     </div>
+
+    <!-- SCHOOL MANAGEMENT -->
+    <div class="proj-card reveal" data-cat="java">
+      <div class="proj-thumb sm pt-green">🏫</div>
+      <div class="proj-flag">Java · MySQL · Desktop App</div>
+      <h3>School Management System</h3>
+      <p>A comprehensive Java desktop application to manage school records — students, teachers, classes, and attendance — with a MySQL database and clean Swing UI.</p>
+      <div class="proj-tags" style="margin-bottom:1rem;">
+        <span class="ptag">Java</span><span class="ptag">MySQL</span><span class="ptag">JDBC</span><span class="ptag">NetBeans</span><span class="ptag">OOP</span>
+      </div>
+      <div class="proj-links">
+        <a href="https://github.com/rnnazla0819-hub/school-management-system" target="_blank" class="proj-link-btn">
+          <span>⌥</span> View Code
+        </a>
+      </div>
+    </div>
+
+    <!-- FEES RECEIPT -->
+    <div class="proj-card reveal" data-cat="java">
+      <div class="proj-thumb sm pt-gold">🧾</div>
+      <div class="proj-flag">Java · Desktop App</div>
+      <h3>Student Fees Receipt System</h3>
+      <p>A Java desktop application for student registration and automatic fee receipt generation — with database integration and print-ready receipt output.</p>
+      <div class="proj-tags" style="margin-bottom:1rem;">
+        <span class="ptag">Java</span><span class="ptag">MySQL</span><span class="ptag">OOP</span><span class="ptag">NetBeans</span>
+      </div>
+      <div class="proj-links">
+        <a href="https://github.com/rnnazla0819-hub/student-fees-receipt-system" target="_blank" class="proj-link-btn">
+          <span>⌥</span> View Code
+        </a>
+      </div>
+    </div>
+
+    <!-- SNAKE GAME -->
+    <div class="proj-card reveal" data-cat="java">
+      <div class="proj-thumb sm pt-purple">🐍</div>
+      <div class="proj-flag">Java · Game Dev · OOP</div>
+      <h3>Snake Game</h3>
+      <p>A classic Snake game built in Java with real-time movement, collision detection, progressive speed increase, and a live scoring system using Java Swing and OOP principles.</p>
+      <div class="proj-tags" style="margin-bottom:1rem;">
+        <span class="ptag">Java</span><span class="ptag">Swing</span><span class="ptag">OOP</span><span class="ptag">Game Loop</span>
+      </div>
+      <div class="proj-links">
+        <a href="https://github.com/rnnazla0819-hub/Snake-Game" target="_blank" class="proj-link-btn">
+          <span>⌥</span> View Code
+        </a>
+      </div>
+    </div>
+
+    <!-- CATCH THE BALL -->
+    <div class="proj-card reveal" data-cat="java">
+      <div class="proj-thumb sm pt-blue">🎯</div>
+      <div class="proj-flag">Java · Game Dev · OOP</div>
+      <h3>Catch the Ball Game</h3>
+      <p>An interactive Java game where the player catches falling balls using a paddle. Features score tracking, increasing difficulty, and smooth animation using Java Swing graphics.</p>
+      <div class="proj-tags" style="margin-bottom:1rem;">
+        <span class="ptag">Java</span><span class="ptag">Swing</span><span class="ptag">OOP</span><span class="ptag">Animation</span>
+      </div>
+      <div class="proj-links">
+        <a href="https://github.com/rnnazla0819-hub/catch-the-ball-java-game" target="_blank" class="proj-link-btn">
+          <span>⌥</span> View Code
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- GITHUB PROFILE LINK -->
+  <div class="github-cta reveal">
+    <div class="ghcta-left">
+      <span class="ghcta-icon">🐙</span>
+      <div>
+        <div class="ghcta-title">See all my work on GitHub</div>
+        <div class="ghcta-sub">All source code, documentation and project files are publicly available</div>
+      </div>
+    </div>
+    <a href="https://github.com/rnnazla0819-hub" target="_blank" class="btn-fill" style="font-size:0.85rem;padding:0.65rem 1.5rem;white-space:nowrap;">
+      View GitHub Profile →
+    </a>
   </div>
 </section>
 
@@ -965,6 +1244,14 @@
   <div class="sec-title">Certifications & <em>Achievements</em></div>
   <div class="certs-grid">
     <div class="cert-card reveal">
+      <div class="cert-ico si-blue">🪟</div>
+      <div class="cert-body">
+        <h4>Career Essentials in Generative AI</h4>
+        <p>Completed the official Microsoft & LinkedIn learning path covering generative AI fundamentals, tools, and responsible AI practices in the workplace.</p>
+        <div class="cert-issuer">Microsoft & LinkedIn Learning</div>
+      </div>
+    </div>
+    <div class="cert-card reveal">
       <div class="cert-ico si-blue">💻</div>
       <div class="cert-body">
         <h4>Full Stack Development</h4>
@@ -1033,6 +1320,103 @@
   </div>
 </section>
 
+<!-- COLLABORATION FULL PAGE -->
+<div class="collab-overlay" id="collabOverlay">
+
+  <!-- TOP BAR -->
+  <div class="collab-topbar">
+    <button class="collab-back" onclick="closeCollab()">← Back to Portfolio</button>
+    <div class="collab-topbar-logo">R.N.<span>Nazla</span></div>
+  </div>
+
+  <!-- BODY -->
+  <div class="collab-body">
+
+    <!-- LEFT: INTRO + OPTIONS -->
+    <div class="collab-left">
+      <div class="collab-badge">Open to Collaborate</div>
+      <h2>Let's build something <em>together.</em></h2>
+      <p>I'm available for internships, freelance projects, and open-source collaborations. Select what you need below and reach out — I'd love to hear your idea!</p>
+
+      <div class="collab-options">
+        <div class="collab-opt selected" onclick="selectOpt(this)">
+          <span class="co-icon">💻</span>
+          <div class="co-title">Web Development</div>
+          <div class="co-desc">PHP, HTML, CSS, JS projects</div>
+        </div>
+        <div class="collab-opt" onclick="selectOpt(this)">
+          <span class="co-icon">🎨</span>
+          <div class="co-title">UI / UX Design</div>
+          <div class="co-desc">Wireframes & prototypes</div>
+        </div>
+        <div class="collab-opt" onclick="selectOpt(this)">
+          <span class="co-icon">✏️</span>
+          <div class="co-title">Graphic Design</div>
+          <div class="co-desc">Visuals, branding, social</div>
+        </div>
+        <div class="collab-opt" onclick="selectOpt(this)">
+          <span class="co-icon">🎓</span>
+          <div class="co-title">Academic Project</div>
+          <div class="co-desc">Group work or assignments</div>
+        </div>
+        <div class="collab-opt" onclick="selectOpt(this)">
+          <span class="co-icon">☕</span>
+          <div class="co-title">Java Development</div>
+          <div class="co-desc">Desktop apps & OOP</div>
+        </div>
+        <div class="collab-opt" onclick="selectOpt(this)">
+          <span class="co-icon">💡</span>
+          <div class="co-title">Other / Open</div>
+          <div class="co-desc">Let's discuss your idea</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: CONTACT + INFO -->
+    <div class="collab-right">
+      <div class="collab-section-title">Reach me directly</div>
+      <div class="collab-actions">
+        <a href="mailto:nazlaraheem0819@gmail.com?subject=Collaboration Request&body=Hi Nazla, I'd like to collaborate with you on..." class="collab-action">
+          <div class="ca-icon ca-blue">📧</div>
+          <div class="ca-body">
+            <div class="ca-title">Send an Email</div>
+            <div class="ca-sub">nazlaraheem0819@gmail.com</div>
+          </div>
+          <span style="margin-left:auto;color:var(--muted);font-size:0.8rem;">→</span>
+        </a>
+        <a href="https://wa.me/94757179143?text=Hi Nazla! I'd like to collaborate with you." target="_blank" class="collab-action">
+          <div class="ca-icon ca-green">💬</div>
+          <div class="ca-body">
+            <div class="ca-title">WhatsApp</div>
+            <div class="ca-sub">+94 757 179 143 · Quick reply</div>
+          </div>
+          <span style="margin-left:auto;color:var(--muted);font-size:0.8rem;">→</span>
+        </a>
+        <a href="https://www.linkedin.com/in/nazla-raheem206633317" target="_blank" class="collab-action">
+          <div class="ca-icon ca-purple">💼</div>
+          <div class="ca-body">
+            <div class="ca-title">LinkedIn</div>
+            <div class="ca-sub">Connect professionally</div>
+          </div>
+          <span style="margin-left:auto;color:var(--muted);font-size:0.8rem;">→</span>
+        </a>
+      </div>
+
+      <div class="collab-info-box">
+        <h4>✦ What I bring to every project</h4>
+        <ul>
+          <li>Clean, well-structured and maintainable code</li>
+          <li>On-time delivery and clear communication</li>
+          <li>Full-stack skills from DB to UI</li>
+          <li>Creative design eye alongside technical work</li>
+          <li>Collaborative mindset and positive attitude</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</div>
+
 <!-- FOOTER -->
 <footer>
   <p>© 2025 <span>R.N. Nazla</span> — All rights reserved</p>
@@ -1046,6 +1430,49 @@
 </footer>
 
 <script>
+  // ─── COLLAB FULL PAGE ───
+  function openCollab() {
+    document.getElementById('collabOverlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+    window.scrollTo(0,0);
+  }
+  function closeCollab() {
+    document.getElementById('collabOverlay').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function selectOpt(el) {
+    document.querySelectorAll('.collab-opt').forEach(o => o.classList.remove('selected'));
+    el.classList.add('selected');
+  }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeCollab(); });
+
+  // ─── PROJECT FILTER ───
+  function filterProjects(cat, btn) {
+    document.querySelectorAll('.pf-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('#projectGrid .proj-card').forEach(card => {
+      const cats = card.getAttribute('data-cat') || '';
+      if (cat === 'all' || cats.includes(cat)) {
+        card.classList.remove('hidden');
+      } else {
+        card.classList.add('hidden');
+      }
+    });
+    // span2 cards: if hidden, collapse properly
+    document.querySelectorAll('#projectGrid .proj-card.span2').forEach(card => {
+      if (!card.classList.contains('hidden')) {
+        card.style.gridColumn = 'span 2';
+      }
+    });
+  }
+
+  // Fix collab button in hero
+  document.querySelectorAll('a[href="#"]').forEach(a => {
+    if (a.textContent.includes('Collaborate')) {
+      a.addEventListener('click', e => { e.preventDefault(); openCollab(); });
+    }
+  });
+
   // ─── THEME TOGGLE ───
   function toggleTheme() {
     const html = document.documentElement;
