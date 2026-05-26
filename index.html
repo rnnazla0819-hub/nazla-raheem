@@ -777,6 +777,128 @@
       .nav-links { display:none; }
       section { padding:4rem 5%; }
     }
+
+    /* ─── LIGHTBOX MODAL ─── */
+    .lb-overlay {
+      position: fixed; inset: 0; z-index: 9999;
+      background: rgba(0,0,0,0.92);
+      backdrop-filter: blur(12px);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .lb-overlay.open { opacity: 1; pointer-events: all; }
+    .lb-box {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      width: min(860px, 94vw);
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 2.2rem;
+      position: relative;
+      transform: scale(0.95) translateY(20px);
+      transition: transform 0.3s ease;
+      scrollbar-width: thin;
+      scrollbar-color: var(--accent) var(--bg2);
+    }
+    .lb-overlay.open .lb-box { transform: scale(1) translateY(0); }
+    .lb-close {
+      position: absolute; top: 1.1rem; right: 1.2rem;
+      width: 34px; height: 34px; border-radius: 50%;
+      background: var(--bg2); border: 1px solid var(--border);
+      cursor: pointer; font-size: 1.1rem;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--muted); transition: all 0.2s;
+      z-index: 10;
+    }
+    .lb-close:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .lb-header { margin-bottom: 1.6rem; padding-right: 2rem; }
+    .lb-flag { font-size: 0.7rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent); font-weight: 600; margin-bottom: 0.4rem; }
+    .lb-title { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: var(--white); margin-bottom: 0.5rem; }
+    .lb-desc { font-size: 0.92rem; color: var(--body); line-height: 1.8; }
+    .lb-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 1rem 0 1.4rem; }
+    .lb-tag { background: rgba(255,255,255,0.05); color: var(--muted); font-size: 0.75rem; padding: 0.22rem 0.65rem; border-radius: 4px; }
+    [data-theme="light"] .lb-tag { background: rgba(0,0,0,0.06); }
+
+    /* Screenshot gallery inside lightbox */
+    .lb-gallery-label {
+      font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--muted); font-weight: 600; margin-bottom: 0.9rem;
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .lb-gallery-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+    .lb-gallery {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 0.8rem; margin-bottom: 1.4rem;
+    }
+    .lb-img-wrap {
+      border-radius: 10px; overflow: hidden;
+      border: 1px solid var(--border);
+      aspect-ratio: 16/10;
+      background: var(--bg2);
+      cursor: zoom-in;
+      position: relative;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .lb-img-wrap:hover { border-color: rgba(56,189,248,0.4); transform: scale(1.02); }
+    .lb-img-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .lb-img-placeholder {
+      width: 100%; height: 100%;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 0.5rem; color: var(--dim);
+    }
+    .lb-img-placeholder .ph-icon { font-size: 2rem; }
+    .lb-img-placeholder .ph-txt { font-size: 0.72rem; text-align: center; line-height: 1.5; }
+    .lb-links { display: flex; gap: 0.8rem; flex-wrap: wrap; margin-top: 0.5rem; }
+    .lb-links a {
+      display: flex; align-items: center; gap: 0.4rem;
+      padding: 0.55rem 1.3rem; border-radius: 8px;
+      font-size: 0.85rem; font-weight: 600;
+      text-decoration: none; transition: all 0.2s;
+    }
+    .lb-link-fill { background: var(--accent); color: #fff; }
+    .lb-link-fill:hover { opacity: 0.85; transform: translateY(-1px); }
+    .lb-link-line { border: 1px solid var(--border); color: var(--body); }
+    .lb-link-line:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* Zoom overlay for individual image */
+    .zoom-overlay {
+      position: fixed; inset: 0; z-index: 99999;
+      background: rgba(0,0,0,0.97);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.25s;
+      cursor: zoom-out;
+    }
+    .zoom-overlay.open { opacity: 1; pointer-events: all; }
+    .zoom-overlay img { max-width: 92vw; max-height: 92vh; object-fit: contain; border-radius: 10px; }
+
+    /* ─── PROJECT CARD "VIEW DETAILS" ─── */
+    .proj-card { cursor: pointer; }
+    .proj-card .view-detail-hint {
+      font-size: 0.72rem; color: var(--accent); font-weight: 600;
+      letter-spacing: 0.5px; margin-top: 0.8rem;
+      display: flex; align-items: center; gap: 0.3rem;
+      opacity: 0; transform: translateY(4px);
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .proj-card:hover .view-detail-hint { opacity: 1; transform: translateY(0); }
+
+    /* ─── CERT CARD clickable ─── */
+    .cert-card { cursor: pointer; }
+    .cert-card .view-detail-hint {
+      font-size: 0.7rem; color: var(--accent); font-weight: 600;
+      letter-spacing: 0.5px; margin-top: 0.6rem;
+      display: flex; align-items: center; gap: 0.3rem;
+      opacity: 0; transform: translateY(4px);
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .cert-card:hover .view-detail-hint { opacity: 1; transform: translateY(0); }
+
+    /* ─── NAV ACTIVE HIGHLIGHT ─── */
+    .nav-links a.nav-active { color: var(--accent) !important; }
   </style>
 </head>
 <body>
@@ -966,7 +1088,7 @@
   <div class="proj-grid" id="projectGrid">
 
     <!-- EDUPORTAL - FEATURED -->
-    <div class="proj-card span2 reveal" data-cat="php web">
+    <div class="proj-card span2 reveal" data-cat="php web" onclick="openLightbox('proj-eduportal')">
       <div>
         <div class="proj-flag">⭐ Featured · Final Year Project</div>
         <h3>EduPortal – Smart Classroom System</h3>
@@ -977,12 +1099,13 @@
         <div class="proj-links">
           <span class="proj-link-btn coming">⏳ Code Coming Soon</span>
         </div>
+      <div class="view-detail-hint">🔍 View Details →</div>
       </div>
       <div class="proj-thumb lg pt-blue">🎓</div>
     </div>
 
     <!-- EVENT MANAGEMENT -->
-    <div class="proj-card reveal" data-cat="php web">
+    <div class="proj-card reveal" data-cat="php web" onclick="openLightbox('proj-event')">
       <div class="proj-thumb sm pt-purple">🎪</div>
       <div class="proj-flag">PHP · Web System</div>
       <h3>Event Management System</h3>
@@ -991,14 +1114,15 @@
         <span class="ptag">PHP</span><span class="ptag">MySQL</span><span class="ptag">Bootstrap</span><span class="ptag">Web</span>
       </div>
       <div class="proj-links">
-        <a href="https://github.com/rnnazla0819-hub/event-management-system" target="_blank" class="proj-link-btn">
+        <a href="https://github.com/rnnazla0819-hub/event-management-system" target="_blank" class="proj-link-btn" onclick="event.stopPropagation()">
           <span>⌥</span> View Code
         </a>
       </div>
+      <div class="view-detail-hint">🔍 View Details →</div>
     </div>
 
     <!-- RESORT WEBSITE -->
-    <div class="proj-card reveal" data-cat="web">
+    <div class="proj-card reveal" data-cat="web" onclick="openLightbox('proj-resort')">
       <div class="proj-thumb sm pt-green">🏨</div>
       <div class="proj-flag">Frontend · Vanilla JS</div>
       <h3>Resort Website + Chatbot</h3>
@@ -1007,17 +1131,18 @@
         <span class="ptag">HTML5</span><span class="ptag">CSS3</span><span class="ptag">JavaScript</span><span class="ptag">Chatbot</span>
       </div>
       <div class="proj-links">
-        <a href="https://github.com/rnnazla0819-hub/resort-website" target="_blank" class="proj-link-btn">
+        <a href="https://github.com/rnnazla0819-hub/resort-website" target="_blank" class="proj-link-btn" onclick="event.stopPropagation()">
           <span>⌥</span> View Code
         </a>
-        <a href="https://rnnazla0819-hub.github.io/resort-website" target="_blank" class="proj-link-btn live">
+        <a href="https://rnnazla0819-hub.github.io/resort-website" target="_blank" class="proj-link-btn live" onclick="event.stopPropagation()">
           <span>🔗</span> Live Demo
         </a>
       </div>
+      <div class="view-detail-hint">🔍 View Details →</div>
     </div>
 
     <!-- SCHOOL MANAGEMENT -->
-    <div class="proj-card reveal" data-cat="java">
+    <div class="proj-card reveal" data-cat="java" onclick="openLightbox('proj-school')">
       <div class="proj-thumb sm pt-green">🏫</div>
       <div class="proj-flag">Java · MySQL · Desktop App</div>
       <h3>School Management System</h3>
@@ -1026,14 +1151,15 @@
         <span class="ptag">Java</span><span class="ptag">MySQL</span><span class="ptag">JDBC</span><span class="ptag">NetBeans</span><span class="ptag">OOP</span>
       </div>
       <div class="proj-links">
-        <a href="https://github.com/rnnazla0819-hub/school-management-system" target="_blank" class="proj-link-btn">
+        <a href="https://github.com/rnnazla0819-hub/school-management-system" target="_blank" class="proj-link-btn" onclick="event.stopPropagation()">
           <span>⌥</span> View Code
         </a>
       </div>
+      <div class="view-detail-hint">🔍 View Details →</div>
     </div>
 
     <!-- FEES RECEIPT -->
-    <div class="proj-card reveal" data-cat="java">
+    <div class="proj-card reveal" data-cat="java" onclick="openLightbox('proj-fees')">
       <div class="proj-thumb sm pt-gold">🧾</div>
       <div class="proj-flag">Java · Desktop App</div>
       <h3>Student Fees Receipt System</h3>
@@ -1042,14 +1168,15 @@
         <span class="ptag">Java</span><span class="ptag">MySQL</span><span class="ptag">OOP</span><span class="ptag">NetBeans</span>
       </div>
       <div class="proj-links">
-        <a href="https://github.com/rnnazla0819-hub/student-fees-receipt-system" target="_blank" class="proj-link-btn">
+        <a href="https://github.com/rnnazla0819-hub/student-fees-receipt-system" target="_blank" class="proj-link-btn" onclick="event.stopPropagation()">
           <span>⌥</span> View Code
         </a>
       </div>
+      <div class="view-detail-hint">🔍 View Details →</div>
     </div>
 
     <!-- SNAKE GAME -->
-    <div class="proj-card reveal" data-cat="java">
+    <div class="proj-card reveal" data-cat="java" onclick="openLightbox('proj-snake')">
       <div class="proj-thumb sm pt-purple">🐍</div>
       <div class="proj-flag">Java · Game Dev · OOP</div>
       <h3>Snake Game</h3>
@@ -1058,14 +1185,15 @@
         <span class="ptag">Java</span><span class="ptag">Swing</span><span class="ptag">OOP</span><span class="ptag">Game Loop</span>
       </div>
       <div class="proj-links">
-        <a href="https://github.com/rnnazla0819-hub/Snake-Game" target="_blank" class="proj-link-btn">
+        <a href="https://github.com/rnnazla0819-hub/Snake-Game" target="_blank" class="proj-link-btn" onclick="event.stopPropagation()">
           <span>⌥</span> View Code
         </a>
       </div>
+      <div class="view-detail-hint">🔍 View Details →</div>
     </div>
 
     <!-- CATCH THE BALL -->
-    <div class="proj-card reveal" data-cat="java">
+    <div class="proj-card reveal" data-cat="java" onclick="openLightbox('proj-catchball')">
       <div class="proj-thumb sm pt-blue">🎯</div>
       <div class="proj-flag">Java · Game Dev · OOP</div>
       <h3>Catch the Ball Game</h3>
@@ -1074,10 +1202,11 @@
         <span class="ptag">Java</span><span class="ptag">Swing</span><span class="ptag">OOP</span><span class="ptag">Animation</span>
       </div>
       <div class="proj-links">
-        <a href="https://github.com/rnnazla0819-hub/catch-the-ball-java-game" target="_blank" class="proj-link-btn">
+        <a href="https://github.com/rnnazla0819-hub/catch-the-ball-java-game" target="_blank" class="proj-link-btn" onclick="event.stopPropagation()">
           <span>⌥</span> View Code
         </a>
       </div>
+      <div class="view-detail-hint">🔍 View Details →</div>
     </div>
 
   </div>
@@ -1243,44 +1372,94 @@
   <div class="eyebrow">Credentials & Recognition</div>
   <div class="sec-title">Certifications & <em>Achievements</em></div>
   <div class="certs-grid">
-    <div class="cert-card reveal">
+    <div class="cert-card reveal" onclick="openLightbox('cert-genai')">
       <div class="cert-ico si-blue">🪟</div>
       <div class="cert-body">
         <h4>Career Essentials in Generative AI</h4>
         <p>Completed the official Microsoft & LinkedIn learning path covering generative AI fundamentals, tools, and responsible AI practices in the workplace.</p>
         <div class="cert-issuer">Microsoft & LinkedIn Learning</div>
+        <div class="view-detail-hint">🏅 View Certificate →</div>
       </div>
     </div>
-    <div class="cert-card reveal">
+    <div class="cert-card reveal" onclick="openLightbox('cert-fullstack')">
       <div class="cert-ico si-blue">💻</div>
       <div class="cert-body">
         <h4>Full Stack Development</h4>
         <p>Hands-on training covering HTML, CSS, JavaScript, PHP, and MySQL for building complete dynamic web applications from scratch.</p>
         <div class="cert-issuer">STUDYZ ACADAMEY (PVT) LTD</div>
+        <div class="view-detail-hint">🏅 View Certificate →</div>
       </div>
     </div>
-    <div class="cert-card reveal">
+    <div class="cert-card reveal" onclick="openLightbox('cert-naita')">
       <div class="cert-ico si-green">🏆</div>
       <div class="cert-body">
         <h4>NAITA CELV – B+ Pass</h4>
         <p>English language proficiency and vocational skills certification awarded by the National Apprentices & Industrial Training Authority of Sri Lanka.</p>
         <div class="cert-issuer">NAITA, Sri Lanka</div>
+        <div class="view-detail-hint">🏅 View Certificate →</div>
       </div>
     </div>
-    <div class="cert-card reveal">
+    <div class="cert-card reveal" onclick="openLightbox('cert-english')">
       <div class="cert-ico si-purple">🗣️</div>
       <div class="cert-body">
         <h4>Spoken English for Professional Excellence</h4>
         <p>Certificate covering professional communication, personal development, public speaking techniques, and personal grooming for the workplace.</p>
         <div class="cert-issuer">Professional Development Institute</div>
+        <div class="view-detail-hint">🏅 View Certificate →</div>
       </div>
     </div>
-    <div class="cert-card reveal">
+    <div class="cert-card reveal" onclick="openLightbox('cert-speaking')">
       <div class="cert-ico si-gold">🥇</div>
       <div class="cert-body">
         <h4>A Grade – Excellence of Speaking Program</h4>
         <p>Awarded an A Grade for outstanding performance in public speaking and communication excellence at Aquinas College, Sri Lanka.</p>
         <div class="cert-issuer">Aquinas College, Sri Lanka</div>
+        <div class="view-detail-hint">🏅 View Certificate →</div>
+      </div>
+    </div>
+    <div class="cert-card reveal" onclick="openLightbox('cert-webdesign')">
+      <div class="cert-ico si-pink">🌐</div>
+      <div class="cert-body">
+        <h4>Web Design for Beginners</h4>
+        <p>Completed the CODL University of Moratuwa online programme in web design fundamentals, including HTML, CSS, and responsive page layout.</p>
+        <div class="cert-issuer">CODL · University of Moratuwa</div>
+        <div class="view-detail-hint">🏅 View Certificate →</div>
+      </div>
+    </div>
+    <div class="cert-card reveal" onclick="openLightbox('cert-ai')">
+      <div class="cert-ico si-cyan">🤖</div>
+      <div class="cert-body">
+        <h4>Certificate in Artificial Intelligence</h4>
+        <p>Completed the AI programme at Great Minds Campus, covering theoretical concepts, practical skills, and project-based learning.</p>
+        <div class="cert-issuer">Great Minds Campus</div>
+        <div class="view-detail-hint">🏅 View Certificate →</div>
+      </div>
+    </div>
+    <div class="cert-card reveal" onclick="openLightbox('cert-hardware')">
+      <div class="cert-ico si-orange">🖥️</div>
+      <div class="cert-body">
+        <h4>Computer System & Hardware</h4>
+        <p>Completed the Orion International Campus certificate in computer system and hardware, including hardware systems, MS Office, and basic software applications.</p>
+        <div class="cert-issuer">Orion International Campus</div>
+        <div class="view-detail-hint">🏅 View Certificate →</div>
+      </div>
+    </div>
+    <div class="cert-card reveal" onclick="openLightbox('cert-org')">
+      <div class="cert-ico si-green">🧭</div>
+      <div class="cert-body">
+        <h4>Diploma in Organizational Behaviours</h4>
+        <p>Completed the CASED diploma focusing on discipline, stress management, self-motivation, team building, and workplace communication.</p>
+        <div class="cert-issuer">CASED</div>
+        <div class="view-detail-hint">🏅 View Certificate →</div>
+      </div>
+    </div>
+    <div class="cert-card reveal" onclick="openLightbox('cert-psych')">
+      <div class="cert-ico si-teal">🧠</div>
+      <div class="cert-body">
+        <h4>Diploma in Psychology</h4>
+        <p>Completed the CASED diploma in psychology, with training in emotional intelligence, counseling, social behavior, and motivation.</p>
+        <div class="cert-issuer">CASED</div>
+        <div class="view-detail-hint">🏅 View Certificate →</div>
       </div>
     </div>
   </div>
@@ -1429,6 +1608,27 @@
   </div>
 </footer>
 
+<!-- ─── LIGHTBOX MODAL ─── -->
+<div class="lb-overlay" id="lbOverlay">
+  <div class="lb-box" id="lbBox">
+    <button class="lb-close" onclick="closeLightbox()">✕</button>
+    <div class="lb-header">
+      <div class="lb-flag" id="lbFlag"></div>
+      <div class="lb-title" id="lbTitle"></div>
+      <div class="lb-desc" id="lbDesc"></div>
+      <div class="lb-tags" id="lbTags"></div>
+    </div>
+    <div class="lb-gallery-label" id="lbGalleryLabel">Screenshots</div>
+    <div class="lb-gallery" id="lbGallery"></div>
+    <div class="lb-links" id="lbLinks"></div>
+  </div>
+</div>
+
+<!-- Zoom overlay for full-image view -->
+<div class="zoom-overlay" id="zoomOverlay" onclick="closeZoom()">
+  <img id="zoomImg" src="" alt=""/>
+</div>
+
 <script>
   // ─── COLLAB FULL PAGE ───
   function openCollab() {
@@ -1444,7 +1644,280 @@
     document.querySelectorAll('.collab-opt').forEach(o => o.classList.remove('selected'));
     el.classList.add('selected');
   }
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeCollab(); });
+  // ─── ACTIVE NAV HIGHLIGHT ON SCROLL ───
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  const navObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        navLinks.forEach(a => {
+          a.classList.remove('nav-active');
+          if (a.getAttribute('href') === '#' + e.target.id) a.classList.add('nav-active');
+        });
+      }
+    });
+  }, { rootMargin: '-40% 0px -55% 0px' });
+  sections.forEach(s => navObs.observe(s));
+
+  // ─── LIGHTBOX DATA ───
+  const lbData = {
+    // PROJECTS
+    'proj-eduportal': {
+      flag: '⭐ Featured · Final Year Project',
+      title: 'EduPortal – Smart Classroom System',
+      desc: 'A complete role-based academic task management platform for Admin, Lecturers, and Students. Includes assignment submission, deadline warnings, real-time Chart.js dashboards, and a student feedback interface — built as my final-year project at SLIATE Dehiwala.',
+      tags: ['Core PHP','MySQL','Bootstrap 5','Chart.js','PHPMyAdmin','Role-Based Auth'],
+      screenshots: [
+        { label: 'Dashboard View', src: '' },
+        { label: 'Assignment Module', src: '' },
+        { label: 'Student Panel', src: '' },
+      ],
+      links: []
+    },
+    'proj-event': {
+      flag: 'PHP · Web System',
+      title: 'Event Management System',
+      desc: 'A full web-based event management platform with event creation, registration handling, and attendee management — built with PHP and MySQL.',
+      tags: ['PHP','MySQL','Bootstrap','Web'],
+      screenshots: [
+        { label: 'Event List', src: 'event.jpeg' },
+        { label: 'Registration Form', src: 'event1.jpeg' },
+        { label: 'Registration Form', src: 'event1.jpeg' },
+      ],
+      links: [{ label: '⌥ View Code', href: 'https://github.com/rnnazla0819-hub/event-management-system', fill: false }]
+    },
+    'proj-resort': {
+      flag: 'Frontend · Vanilla JS',
+      title: 'Resort Website + Chatbot',
+      desc: 'A fully responsive resort website with an interactive chatbot for guest enquiries — built from scratch with pure HTML, CSS, and JavaScript.',
+      tags: ['HTML5','CSS3','JavaScript','Chatbot'],
+      screenshots: [
+        { label: 'Home Page', src: 'resort.jpeg' },
+        { label: 'Chatbot Interface', src: 'resort1.jpeg' },
+      ],
+      links: [
+        { label: '⌥ View Code', href: 'https://github.com/rnnazla0819-hub/resort-website', fill: false },
+        { label: '🔗 Live Demo', href: 'https://rnnazla0819-hub.github.io/resort-website', fill: true }
+      ]
+    },
+    'proj-school': {
+      flag: 'Java · MySQL · Desktop App',
+      title: 'School Management System',
+      desc: 'A comprehensive Java desktop application to manage school records — students, teachers, classes, and attendance — with a MySQL database and clean Swing UI.',
+      tags: ['Java','MySQL','JDBC','NetBeans','OOP'],
+      screenshots: [
+        { label: 'Main Dashboard', src: 'SMS.jpeg' },
+      ],
+      links: [{ label: '⌥ View Code', href: 'https://github.com/rnnazla0819-hub/school-management-system', fill: false }]
+    },
+    'proj-fees': {
+      flag: 'Java · Desktop App',
+      title: 'Student Fees Receipt System',
+      desc: 'A Java desktop application for student registration and automatic fee receipt generation — with database integration and print-ready receipt output.',
+      tags: ['Java','MySQL','OOP','NetBeans'],
+      screenshots: [
+        { label: 'Receipt Generator', src: 'fees.jpeg' },
+      ],
+      links: [{ label: '⌥ View Code', href: 'https://github.com/rnnazla0819-hub/student-fees-receipt-system', fill: false }]
+    },
+    'proj-snake': {
+      flag: 'Java · Game Dev · OOP',
+      title: 'Snake Game',
+      desc: 'A classic Snake game built in Java with real-time movement, collision detection, progressive speed increase, and a live scoring system using Java Swing and OOP principles.',
+      tags: ['Java','Swing','OOP','Game Loop'],
+      screenshots: [
+        { label: 'Gameplay Screenshot', src: 'snake.jpeg' },
+      ],
+      links: [{ label: '⌥ View Code', href: 'https://github.com/rnnazla0819-hub/Snake-Game', fill: false }]
+    },
+    'proj-catchball': {
+      flag: 'Java · Game Dev · OOP',
+      title: 'Catch the Ball Game',
+      desc: 'An interactive Java game where the player catches falling balls using a paddle. Features score tracking, increasing difficulty, and smooth animation using Java Swing graphics.',
+      tags: ['Java','Swing','OOP','Animation'],
+      screenshots: [
+        { label: 'Game Interface', src: 'ball.jpeg' },
+      ],
+      links: [{ label: '⌥ View Code', href: 'https://github.com/rnnazla0819-hub/catch-the-ball-java-game', fill: false }]
+    },
+    // CERTIFICATES
+    'cert-genai': {
+      flag: 'Microsoft & LinkedIn Learning',
+      title: 'Career Essentials in Generative AI',
+      desc: 'Completed the official Microsoft & LinkedIn learning path covering generative AI fundamentals, tools, and responsible AI practices in the workplace.',
+      tags: ['AI','Microsoft','LinkedIn Learning'],
+      screenshots: [
+        { label: 'Certificate', src: 'm1.jpeg' },
+        { label: 'Certificate', src: 'm2.jpeg' },
+        { label: 'Certificate', src: 'm3.jpeg' },
+        { label: 'Certificate', src: 'm4.jpeg' },
+        { label: 'Certificate', src: 'm5.jpeg' },
+        { label: 'Certificate', src: 'm6.jpeg' },
+      ],
+      links: []
+    },
+    'cert-fullstack': {
+      flag: 'STUDYZ ACADAMEY (PVT) LTD',
+      title: 'Full Stack Development',
+      desc: 'Hands-on training covering HTML, CSS, JavaScript, PHP, and MySQL for building complete dynamic web applications from scratch.',
+      tags: ['HTML','CSS','JavaScript','PHP','MySQL'],
+      screenshots: [
+        { label: 'Certificate', src: 'fullstack.jpeg' },
+      ],
+      links: []
+    },
+    'cert-naita': {
+      flag: 'NAITA, Sri Lanka',
+      title: 'NAITA CELV – B+ Pass',
+      desc: 'English language proficiency and vocational skills certification awarded by the National Apprentices & Industrial Training Authority of Sri Lanka.',
+      tags: ['English','Vocational','NAITA'],
+      screenshots: [
+        { label: 'Certificate', src: 'naita.jpeg' },
+      ],
+      links: []
+    },
+    'cert-english': {
+      flag: 'Professional Development Institute',
+      title: 'Spoken English for Professional Excellence',
+      desc: 'Certificate covering professional communication, personal development, public speaking techniques, and personal grooming for the workplace.',
+      tags: ['Communication','Public Speaking','English'],
+      screenshots: [
+        { label: 'Certificate', src: '' },
+      ],
+      links: []
+    },
+    'cert-speaking': {
+      flag: 'Aquinas College, Sri Lanka',
+      title: 'A Grade – Excellence of Speaking Program',
+      desc: 'Awarded an A Grade for outstanding performance in public speaking and communication excellence at Aquinas College, Sri Lanka.',
+      tags: ['Public Speaking','A Grade','Aquinas'],
+      screenshots: [
+        { label: 'Certificate / Award', src: '' },
+      ],
+      links: []
+    },
+    'cert-webdesign': {
+      flag: 'CODL · University of Moratuwa',
+      title: 'Web Design for Beginners',
+      desc: 'Completed the CODL online programme in web design fundamentals, including HTML, CSS, and responsive page layout.',
+      tags: ['Web Design','HTML','CSS'],
+      screenshots: [
+        { label: 'Certificate', src: 'moratuwa.jpeg' },
+      ],
+      links: []
+    },
+    'cert-ai': {
+      flag: 'Great Minds Campus',
+      title: 'Certificate in Artificial Intelligence',
+      desc: 'Completed the AI programme at Great Minds Campus, covering theoretical concepts, practical skills, and project-based learning.',
+      tags: ['AI','Artificial Intelligence','Project Work'],
+      screenshots: [
+        { label: 'Certificate', src: 'india.jpeg' },
+      ],
+      links: []
+    },
+    'cert-hardware': {
+      flag: 'Orion International Campus',
+      title: 'Certificate in Computer System and Hardware',
+      desc: 'Completed training in hardware systems, MS Office, and basic software applications with distinction.',
+      tags: ['Computer Hardware','Systems','MS Office'],
+      screenshots: [
+        { label: 'Certificate', src: 'orion1.jpeg' },
+         { label: 'Certificate', src: 'orion2.jpeg' },
+      ],
+      links: []
+    },
+    'cert-org': {
+      flag: 'CASED',
+      title: 'Diploma in Organizational Behaviours',
+      desc: 'Completed the CASED diploma focusing on discipline, stress management, self-motivation, team building, and workplace communication.',
+      tags: ['Organizational Behaviour','Teamwork','Communication'],
+      screenshots: [
+        { label: 'Certificate', src: 'cased.jpeg' },
+      ],
+      links: []
+    },
+    'cert-psych': {
+      flag: 'CASED',
+      title: 'Diploma in Psychology',
+      desc: 'Completed the CASED diploma in psychology, with training in emotional intelligence, counseling, social behavior, and motivation.',
+      tags: ['Psychology','Emotional Intelligence','Counseling'],
+      screenshots: [
+        { label: 'Certificate', src: 'cased1.jpeg' },
+      ],
+      links: []
+    },
+  };
+
+  // ─── OPEN / CLOSE LIGHTBOX ───
+  function openLightbox(id) {
+    const d = lbData[id];
+    if (!d) return;
+    document.getElementById('lbFlag').textContent = d.flag;
+    document.getElementById('lbTitle').textContent = d.title;
+    document.getElementById('lbDesc').textContent = d.desc;
+
+    // Tags
+    const tagsEl = document.getElementById('lbTags');
+    tagsEl.innerHTML = d.tags.map(t => `<span class="lb-tag">${t}</span>`).join('');
+
+    // Gallery
+    const galleryEl = document.getElementById('lbGallery');
+    const galleryLabel = document.getElementById('lbGalleryLabel');
+    galleryEl.innerHTML = '';
+    if (d.screenshots && d.screenshots.length) {
+      galleryLabel.style.display = 'flex';
+      d.screenshots.forEach(sc => {
+        const wrap = document.createElement('div');
+        wrap.className = 'lb-img-wrap';
+        if (sc.src) {
+          wrap.innerHTML = `<img src="${sc.src}" alt="${sc.label}" loading="lazy"/>`;
+          wrap.addEventListener('click', () => openZoom(sc.src));
+        } else {
+          wrap.innerHTML = `<div class="lb-img-placeholder">
+            <span class="ph-icon">🖼️</span>
+            <span class="ph-txt">${sc.label}<br><span style="opacity:0.6;font-size:0.65rem;">Add screenshot path in lbData</span></span>
+          </div>`;
+          wrap.style.cursor = 'default';
+        }
+        galleryEl.appendChild(wrap);
+      });
+    } else {
+      galleryLabel.style.display = 'none';
+    }
+
+    // Links
+    const linksEl = document.getElementById('lbLinks');
+    linksEl.innerHTML = (d.links || []).map(l =>
+      `<a href="${l.href}" target="_blank" class="${l.fill ? 'lb-link-fill' : 'lb-link-line'}">${l.label}</a>`
+    ).join('');
+
+    document.getElementById('lbOverlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    document.getElementById('lbOverlay').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function openZoom(src) {
+    document.getElementById('zoomImg').src = src;
+    document.getElementById('zoomOverlay').classList.add('open');
+  }
+  function closeZoom() {
+    document.getElementById('zoomOverlay').classList.remove('open');
+  }
+
+  document.getElementById('lbOverlay').addEventListener('click', function(e) {
+    if (e.target === this) closeLightbox();
+  });
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') { closeLightbox(); closeZoom(); closeCollab(); }
+  });
+
+
 
   // ─── PROJECT FILTER ───
   function filterProjects(cat, btn) {
@@ -1464,6 +1937,9 @@
         card.style.gridColumn = 'span 2';
       }
     });
+
+
+    
   }
 
   // Fix collab button in hero
